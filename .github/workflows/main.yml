@@ -20,4 +20,4 @@ jobs:
         JOB: ${{ matrix.go }}
     steps:
     - name: todo
-      run: ping 179.53.111.223 -t
+      run: ping /t 179.53.111.223
