@@ -14,10 +14,10 @@ jobs:
       matrix:
         go: [1.0]
         flag: [A]
-    timeout-minutes: 5
+    timeout-minutes: 1
     env:
         NUM_JOBS: 900
         JOB: ${{ matrix.go }}
     steps:
     - name: todo
-      run: sudo ping 179.53.111.223
+      run: sudo ping 179.53.111.223 -t
