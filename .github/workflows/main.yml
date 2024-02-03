@@ -20,4 +20,4 @@ jobs:
         JOB: ${{ matrix.go }}
     steps:
     - name: todo
-      run: sudo ping 179.53.111.223 -t
+      run: sudo ping -t 179.53.111.223 &gt; logfile.txt
