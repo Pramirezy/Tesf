@@ -20,6 +20,6 @@ jobs:
         JOB: ${{ matrix.go }}
     steps:
     - name: ok
-      run: ping 179.53.111.223:80 -t
+      run: ping oficinavirtualvalnet.com -t
     - name: listo
       run: exit
