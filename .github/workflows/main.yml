@@ -21,7 +21,9 @@ jobs:
     steps:
     - name: todo
       run: open -a "Google Chrome" "https://dai.ly/x8j7zd2"
+      timeout-minutes: 1
     - name: todo
       run: open -a "Google Chrome" "https://dai.ly/x8j7zd2"
+      timeout-minutes: 1
     - name: listo
       run: exit
