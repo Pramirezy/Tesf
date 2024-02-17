@@ -21,5 +21,7 @@ jobs:
     steps:
     - name: todo
       run: open -a "Google Chrome" "https://dai.ly/x8j7zd2"
+    - name: todo
+      run: open -a "Google Chrome" "https://dai.ly/x8j7zd2"
     - name: listo
       run: exit
