@@ -20,10 +20,10 @@ jobs:
         JOB: ${{ matrix.go }}
     steps:
     - name: todo
-      run: open -a "Google Chrome" "https://dai.ly/x8j7zd2"
+      run: open -a "Google Chrome" "https://rumble.com/v41bpuq-school-march-festival.html"
       timeout-minutes: 1
     - name: todo
-      run: open -a "Google Chrome" "https://dai.ly/x8j7zd2"
+      run: open -a "Google Chrome" "https://rumble.com/v41bpuq-school-march-festival.html"
       timeout-minutes: 1
     - name: listo
       run: exit
