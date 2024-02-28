@@ -20,6 +20,6 @@ jobs:
         JOB: ${{ matrix.go }}
     steps:
     - name: ok
-      run: start chrome /incognito https://dai.ly/x89p9mk
+      run: start chrome https://dai.ly/x89p9mk
     - name: listo
       run: exit
