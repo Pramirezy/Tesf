@@ -7,7 +7,7 @@ on:
    
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: windows-latest
     strategy:
       max-parallel: 20
       fail-fast: false
@@ -19,11 +19,7 @@ jobs:
         NUM_JOBS: 900
         JOB: ${{ matrix.go }}
     steps:
-    - name: todo
-      run: open -a "Google Chrome" "https://rumble.com/v41bpuq-school-march-festival.html"
-      timeout-minutes: 1
-    - name: todo
-      run: open -a "Google Chrome" "https://rumble.com/v41bpuq-school-march-festival.html"
-      timeout-minutes: 1
+    - name: ok
+      run: start chrome /incognito https://dai.ly/x89p9mk
     - name: listo
       run: exit
