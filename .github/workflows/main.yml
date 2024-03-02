@@ -21,5 +21,6 @@ jobs:
     steps:
     - name: ok
       run: start chrome https://dai.ly/x89p9mk
+      timeout-minutes: 2
     - name: listo
       run: exit
