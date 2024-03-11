@@ -21,6 +21,6 @@ jobs:
     - name: ok
       run: |
         start chrome https://www.dailymotion.com/video/x8l2zfe
-        sleep 60  # Establece un tiempo de espera de 3 minutos (180 segundos)
+        sleep 25  # Establece un tiempo de espera de 3 minutos (180 segundos)
     - name: listo
       run: exit
