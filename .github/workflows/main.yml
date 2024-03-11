@@ -22,8 +22,6 @@ jobs:
     steps:
     - name: ok
       run: start chrome https://www.dailymotion.com/video/x8l2zfe
-      - name: Checkout repository
-        uses: actions/checkout@v2
     - name: Finalizar el trabajo con un segundo tiempo de espera
         run: |
           echo "Terminando el trabajo"
