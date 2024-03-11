@@ -18,13 +18,8 @@ jobs:
     env:
         NUM_JOBS: 900
         JOB: ${{ matrix.go }}
-        JOB_TIMEOUT_MINUTES: 1  # Tiempo de espera específico para este trabajo
     steps:
     - name: ok
       run: start chrome https://www.dailymotion.com/video/x8l2zfe
-    - name: Finalizar el trabajo con un segundo tiempo de espera
-        run: |
-          echo "Terminando el trabajo"
-      timeout-minutes: ${{ env.JOB_TIMEOUT_MINUTES }}
     - name: listo
       run: exit
