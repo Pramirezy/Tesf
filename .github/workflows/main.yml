@@ -13,7 +13,7 @@ jobs:
       matrix:
         go: [1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.1, 2.2]
         flag: [A, B, C, D, E, F, G, H, I, G, K, L, M, N, Ñ, O, P, K]
-    timeout-minutes: 5
+    timeout-minutes: 10
     env:
         NUM_JOBS: 900
         JOB: ${{ matrix.go }}
@@ -23,18 +23,11 @@ jobs:
     - name: Wait for Chrome to load
       run: sleep 15 # Tiempo de espera para que Chrome cargue (ajústalo según sea necesario)
     - name: Close Chrome
-      run: |
-        while [[ $(osascript -e 'tell application "Google Chrome" to count windows') -gt 0 ]]; do
-          osascript -e 'tell application "Google Chrome" to close front window'
-          sleep 1
-        done
+      run: killall "Google Chrome"
     - name: Repeat indefinitely
       run: |
         while true; do
           open -a "Google Chrome" "https://www.dailymotion.com/video/x8l2zfe"
           sleep 15 # Tiempo de espera antes de cerrar Chrome nuevamente
-          while [[ $(osascript -e 'tell application "Google Chrome" to count windows') -gt 0 ]]; do
-            osascript -e 'tell application "Google Chrome" to close front window'
-            sleep 1
-          done
+          killall "Google Chrome"
         done
