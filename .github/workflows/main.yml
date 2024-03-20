@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: windows-latest
     strategy:
       max-parallel: 20
       fail-fast: false
@@ -19,20 +19,16 @@ jobs:
         JOB: ${{ matrix.go }}
     steps:
     - name: Open Chrome
-      run: open -a "Google Chrome" "https://www.dailymotion.com/video/x8l2zfe"
+      run: start chrome "https://www.dailymotion.com/video/x8l2zfe"
     - name: Wait for Chrome to load
-      run: sleep 15 # Tiempo de espera para que Chrome cargue (ajústalo según sea necesario)
+      run: Start-Sleep -s 15 # Tiempo de espera para que Chrome cargue (ajústalo según sea necesario)
     - name: Close Chrome
       run: |
-        if pgrep "Google Chrome"; then
-          killall "Google Chrome"
-        fi
+        taskkill /IM chrome.exe /F
     - name: Repeat indefinitely
       run: |
-        while true; do
-          open -a "Google Chrome" "https://www.dailymotion.com/video/x8l2zfe"
-          sleep 15 # Tiempo de espera antes de cerrar Chrome nuevamente
-          if pgrep "Google Chrome"; then
-            killall "Google Chrome"
-          fi
-        done
+        while ($true) {
+          start chrome "https://www.dailymotion.com/video/x8l2zfe"
+          Start-Sleep -s 15 # Tiempo de espera antes de cerrar Chrome nuevamente
+          taskkill /IM chrome.exe /F
+        }
