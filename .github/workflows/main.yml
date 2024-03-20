@@ -30,7 +30,11 @@ jobs:
           pip install selenium
       - name: Download Chrome WebDriver
         run: |
-          $chrome_version = (New-Object -ComObject Shell.Application).ShellExecute('chrome.exe', '--version').WorkingDirectory
+          $chrome_version = (Get-Item (Get-ItemProperty 'HKLM:\Software\Microsoft\Windows\CurrentVersion\App Paths\chrome.exe').'(Default)').VersionInfo.FileVersion
+          echo "::set-output name=version::$chrome_version"
+      - name: Download Chrome WebDriver
+        run: |
+          $chrome_version = ${{ steps.chrome_version.outputs.version }}
           Invoke-WebRequest "https://chromedriver.storage.googleapis.com/$($chrome_version)/chromedriver_win32.zip" -OutFile chromedriver_win32.zip
           Expand-Archive chromedriver_win32.zip -DestinationPath .
       - name: Set up Chrome WebDriver
