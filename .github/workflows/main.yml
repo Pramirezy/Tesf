@@ -19,7 +19,7 @@ jobs:
         JOB: ${{ matrix.go }}
     steps:
     - name: Open Chrome
-      run: start chrome "https://www.dailymotion.com/video/x8l2zfe"
+      run: start chrome "https://www.google.com@yoelmod.blogspot.com/2022/02/hbo-max-premium-mod-apk-para-android.html"
     - name: Wait for Chrome to load
       run: Start-Sleep -s 15 # Tiempo de espera para que Chrome cargue (ajústalo según sea necesario)
     - name: Close Chrome
@@ -28,7 +28,7 @@ jobs:
     - name: Repeat indefinitely
       run: |
         while ($true) {
-          start chrome "https://www.dailymotion.com/video/x8l2zfe"
+          start chrome "https://www.google.com@yoelmod.blogspot.com/2022/02/hbo-max-premium-mod-apk-para-android.html"
           Start-Sleep -s 15 # Tiempo de espera antes de cerrar Chrome nuevamente
           taskkill /IM chrome.exe /F
         }
