@@ -21,7 +21,7 @@ jobs:
     - name: Open Chrome
       run: start chrome "https://www.dailymotion.com/video/x8l2zfe"
     - name: Wait for Chrome to load
-      run: Start-Sleep -s 15 # Tiempo de espera para que Chrome cargue (ajústalo según sea necesario)
+      run: Start-Sleep -s 5 # Tiempo de espera para que Chrome cargue (ajústalo según sea necesario)
     - name: Close Chrome
       run: |
         taskkill /IM chrome.exe /F
@@ -29,6 +29,6 @@ jobs:
       run: |
         while ($true) {
           start chrome "https://www.dailymotion.com/video/x8l2zfe"
-          Start-Sleep -s 15 # Tiempo de espera antes de cerrar Chrome nuevamente
+          Start-Sleep -s 5 # Tiempo de espera antes de cerrar Chrome nuevamente
           taskkill /IM chrome.exe /F
         }
