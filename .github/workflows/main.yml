@@ -23,7 +23,7 @@ jobs:
         Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
         sleep 5 # Esperar a que Xvfb se inicie correctamente
         while true; do
-          google-chrome --no-sandbox --disable-gpu --display=:99 --remote-debugging-port=9222 --disable-dev-shm-usage "https://www.dailymotion.com" &
+          google-chrome --no-sandbox --disable-gpu --display=:99 --remote-debugging-port=9222 --disable-dev-shm-usage "https://www.dailymotion.com/video/x8l2zfe" &
           sleep 5
           pkill -f chrome # Cerrar la instancia anterior de Google Chrome
           sleep 1
