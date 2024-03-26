@@ -1,13 +1,30 @@
-language: generic
+name: Refresh Page Workflow
 
-services:
-  - docker
-
-before_install:
-  - sudo apt-get install -y xorg
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  include:
-    - name: Refresh Page Job
-      script:
-        - docker run -v $PWD:/workdir -w /workdir ubuntu:latest /bin/bash -c "apt update && apt install -y google-chrome-stable xdotool && google-chrome 'https://www.dailymotion.com' & while true; do sleep 5; xdotool search --sync --onlyvisible --class 'Google-chrome' windowfocus key F5; sleep 1; done"
+  refresh_page_job:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y google-chrome-stable xvfb
+        
+    - name: Run script to refresh page
+      run: |
+        export DISPLAY=:99
+        Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+        sleep 5 # Esperar a que Xvfb se inicie correctamente
+        while true; do
+          google-chrome --no-sandbox --disable-gpu --display=:99 --remote-debugging-port=9222 --disable-dev-shm-usage "https://www.dailymotion.com" &
+          sleep 5
+          pkill -f chrome # Cerrar la instancia anterior de Google Chrome
+          sleep 1
+        done
