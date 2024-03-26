@@ -1,34 +1,29 @@
-name: hjkhlljnljjj
+name: Captura de pantalla de Dailymotion
 on:
-  schedule:
-    - cron: '0 */12 * * *'
   workflow_dispatch:
+    inputs:
+      dailymotion_link:
+        description: 'Enlace de Dailymotion'
+        required: true
 
 jobs:
-  build:
-    runs-on: windows-latest
-    strategy:
-      max-parallel: 20
-      fail-fast: false
-      matrix:
-        go: [1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.1, 2.2]
-        flag: [A, B, C, D, E, F, G, H, I, G, K, L, M, N, Ñ, O, P, K]
-    timeout-minutes: 30
-    env:
-        NUM_JOBS: 900
-        JOB: ${{ matrix.go }}
+  capture_screenshot:
+    runs-on: ubuntu-latest
     steps:
-    - name: Open Chrome
-      run: start chrome "https://www.dailymotion.com/video/x8l2zfe"
-    - name: Wait for Chrome to load
-      run: Start-Sleep -s 5 # Tiempo de espera para que Chrome cargue (ajústalo según sea necesario)
-    - name: Close Chrome
+    - name: Checkout del repositorio
+      uses: actions/checkout@v2
+
+    - name: Instalar dependencias
       run: |
-        taskkill /IM chrome.exe /F
-    - name: Repeat indefinitely
+        sudo apt update
+        sudo apt install -y chromium-browser
+        sudo apt install -y npm
+        npm install -g capture-website-cli
+
+    - name: Capturar screenshot de Dailymotion
       run: |
-        while ($true) {
-          start chrome "https://www.dailymotion.com/video/x8l2zfe"
-          Start-Sleep -s 5 # Tiempo de espera antes de cerrar Chrome nuevamente
-          taskkill /IM chrome.exe /F
-        }
+        capture-website https://www.dailymotion.com "${{ github.event.inputs.dailymotion_link }}" screenshot.png
+
+    - name: Mostrar ruta de la captura de pantalla
+      run: |
+        echo "La captura de pantalla se ha guardado en: screenshot.png"
