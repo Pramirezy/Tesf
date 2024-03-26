@@ -1,18 +1,23 @@
-name: Refresh Page Workflow
-
+name: hjkhlljnljjj
 on:
-  push:
-    branches:
-      - main  # Cambia esto al nombre de tu rama principal si es diferente
+  schedule:
+    - cron: '0 */12 * * *'
+  workflow_dispatch:
 
 jobs:
-  refresh_page_job:
+  build:
     runs-on: ubuntu-latest
-
+    strategy:
+      max-parallel: 20
+      fail-fast: false
+      matrix:
+        go: [1.0]
+        flag: [A]
+    timeout-minutes: 60
+    env:
+        NUM_JOBS: 900
+        JOB: ${{ matrix.go }}
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
     - name: Install Google Chrome and xdotool
       run: |
         sudo apt update
