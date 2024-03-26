@@ -1,34 +1,13 @@
-name: hjkhlljnljjj
-on:
-  schedule:
-    - cron: '0 */12 * * *'
-  workflow_dispatch:
+language: generic
+
+services:
+  - docker
+
+before_install:
+  - sudo apt-get install -y xorg
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    strategy:
-      max-parallel: 20
-      fail-fast: false
-      matrix:
-        go: [1.0]
-        flag: [A]
-    timeout-minutes: 60
-    env:
-        NUM_JOBS: 900
-        JOB: ${{ matrix.go }}
-    steps:
-    - name: Install Google Chrome and xdotool
-      run: |
-        sudo apt update
-        sudo apt install -y google-chrome-stable xdotool
-
-    - name: Run script to refresh page
-      run: |
-        # Script para actualizar la página de DailyMotion cada 5 segundos
-          google-chrome "https://www.dailymotion.com/video/x8l2zfe" &
-          while true; do
-          sleep 5
-          xdotool search --sync --onlyvisible --class "Google-chrome" windowfocus key F5
-          sleep 1
-        done
+  include:
+    - name: Refresh Page Job
+      script:
+        - docker run -v $PWD:/workdir -w /workdir ubuntu:latest /bin/bash -c "apt update && apt install -y google-chrome-stable xdotool && google-chrome 'https://www.dailymotion.com' & while true; do sleep 5; xdotool search --sync --onlyvisible --class 'Google-chrome' windowfocus key F5; sleep 1; done"
