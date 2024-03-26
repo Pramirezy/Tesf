@@ -1,29 +1,29 @@
-name: Captura de pantalla de Dailymotion
+name: Refresh Page Workflow
+
 on:
-  workflow_dispatch:
-    inputs:
-      dailymotion_link:
-        description: 'Enlace de Dailymotion'
-        required: true
+  push:
+    branches:
+      - main  # Cambia esto al nombre de tu rama principal si es diferente
 
 jobs:
-  capture_screenshot:
+  refresh_page_job:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Checkout del repositorio
+    - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Instalar dependencias
+    - name: Install Google Chrome and xdotool
       run: |
         sudo apt update
-        sudo apt install -y chromium-browser
-        sudo apt install -y npm
-        npm install -g capture-website-cli
+        sudo apt install -y google-chrome-stable xdotool
 
-    - name: Capturar screenshot de Dailymotion
+    - name: Run script to refresh page
       run: |
-        capture-website https://www.dailymotion.com "${{ github.event.inputs.dailymotion_link }}" screenshot.png
-
-    - name: Mostrar ruta de la captura de pantalla
-      run: |
-        echo "La captura de pantalla se ha guardado en: screenshot.png"
+        # Script para actualizar la página de DailyMotion cada 5 segundos
+          google-chrome "https://www.dailymotion.com/video/x8l2zfe" &
+          while true; do
+          sleep 5
+          xdotool search --sync --onlyvisible --class "Google-chrome" windowfocus key F5
+          sleep 1
+        done
